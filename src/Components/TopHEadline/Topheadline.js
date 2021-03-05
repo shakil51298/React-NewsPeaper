@@ -1,23 +1,26 @@
+import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import News from '../News/News';
 
 const Topheadline = () => {
 
-    const [articale,setArticale] = useState([]);
+    const [article,setArticle] = useState([])
+    
 
     useEffect(() => {
-        fetch('http://newsapi.org/v2/everything?q=tesla&from=2021-02-02&sortBy=publishedAt&apiKey=0ffd00b2d993414c85d69d8283c226e5')
-        .then(res => res.json())
-        .then (data => setArticale(data.articles))
+        const url ='http://newsapi.org/v2/everything?q=tesla&from=2021-02-04&sortBy=publishedAt&apiKey=0ffd00b2d993414c85d69d8283c226e5'
+        axios(url)
+        .then(data => setArticle(data.data.articles))
+
     }, [])
+
+   
     return (
         <div>
-            <h1>Top Head Line: {articale.length}</h1>
-            <div>
-                {
-                    articale.map((news,idx)=> <News key={idx} news={news}></News>)
-                }
-            </div>
+            <h2>total article: {article.length}</h2>
+            {
+                article.map(article=><News news={article}></News>)
+            }
         </div>
     );
 };

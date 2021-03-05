@@ -15,5 +15,4 @@ const News = (props) => {
             </Card>
     );
 };
-
 export default News;
